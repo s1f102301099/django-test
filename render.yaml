@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: django-web
+    env: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        value: ${SECRET_KEY}
+      - key: DEBUG
+        value: 'false'
+      - key: ALLOWED_HOSTS
+        value: yourapp.onrender.com
+      - key: DATABASE_URL
+        value: ${DATABASE_URL}
+      - key: AWS_ACCESS_KEY_ID
+        value: ${AWS_ACCESS_KEY_ID}
+      - key: AWS_SECRET_ACCESS_KEY
+        value: ${AWS_SECRET_ACCESS_KEY}
+      - key: AWS_STORAGE_BUCKET_NAME
+        value: ${AWS_STORAGE_BUCKET_NAME}
+    autoDeploy: true
